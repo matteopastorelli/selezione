@@ -1,0 +1,10 @@
+######
+# Nome: comandiDaEseguire.file
+# Funzione: In questo file vengono definiti i comandi che ssh-multi-vm.sh esegue sulle vm remote
+# ----------------------------------------------------
+if [ -n "$(lsb_release -d | grep -i Ubuntu)" ]; then
+apt-get --assume-yes install apache2
+else yum -y install httpd
+fi
+
+echo WORKDIR=/home/myprogram/ > /etc/myprogram.conf
