@@ -1,0 +1,27 @@
+	
+	
+version: '3.5'	
+services:
+  shop_catalog:
+    build: ShopCatalogDockerfile
+    depends_on:
+      - mongo
+	    - reverseproxy
+  shop_purchase:
+    build: ShopPurchaseDockerfile
+    depends_on:
+      - mongo
+	    - reverseproxy
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+    - "27017:27017"
+  reverseproxy:
+        image: jwilder/nginx-proxy
+        ports:
+            - "80:80"
+		volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+         restart: always
+		 
